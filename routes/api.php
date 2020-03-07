@@ -21,6 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Auth::routes();
 
-//Route::get('me', 'Auth\LoginController@me');
+Route::get('me', 'Auth\LoginController@me');
 
 Route::resource('todo', 'TodoController');

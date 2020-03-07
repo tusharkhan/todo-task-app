@@ -66,22 +66,9 @@ class RegisterController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-//    protected function create(array $data)
-//    {
-//        $user =  User::create([
-//            'name' => $data['name'],
-//            'email' => $data['email'],
-//            'password' => Hash::make($data['password']),
-//        ]);
-//
-//        $token = auth()->login($user);
-//
-//        return $this->respondWithToken($token);
-//    }
-
-
     public function register(Request $request)
     {
+        $request['mac_address'] = substr(exec('getmac'), 0, 17);
         $validator = Validator::make($request->all(), [
             'email' => 'required|string|email|max:255|unique:users',
             'name' => 'required',

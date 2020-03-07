@@ -47,8 +47,6 @@ class TodoController extends Controller
         $validator = Validator::make($request->all(), [
             'user_id' => 'required',
             'name' => 'required',
-            'description'=> 'required',
-            'browser_id' => $this->get_browser_id()
         ]);
 
         if ($validator->fails()) return response()->json($validator->errors());
@@ -96,18 +94,17 @@ class TodoController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'description'=> 'required',
             'completed' => 'required'
         ]);
 
         if ($validator->fails()) return response()->json($validator->errors());
 
-        $res = $todo->update($request->all());
+        $res = $todo->save($request->all());
 
         //returning true
         return response()->json([
             'msg' => 'Todo has been updated!',
-            'todo' => $res,
+            'todo' => $todo,
         ],200);
     }
 
